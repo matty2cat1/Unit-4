@@ -24,3 +24,5 @@ double(False) #does this work
 
 bigger(5,4)
 bigger("Westelman","Matt")
+
+print("The max of 3 and 4 is", max(3,4))
