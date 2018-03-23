@@ -40,6 +40,7 @@ def moveDown(event):
             updateScore()
     
 def moveBanana():
+    data['frames'] = 0
     banana.x = randint(0,COLS-1)*CELL_SIZE
     banana.y = randint(0,ROWS-1)*CELL_SIZE
     
@@ -48,12 +49,17 @@ def updateScore():
     data['scoreText'].destroy() #remove old writing
     scoreBox = TextAsset('Score = '+str(data['score']))
     data['scoreText'] = Sprite(scoreBox,(0,ROWS*CELL_SIZE))
+def step():
+    data['frames'] +=1
+    if data['frames']%150 == 0:
+        moveBanana()
     
 if __name__ == '__main__':
     
     #hold variable in dictionary
     data = {}
     data['score'] = 0
+    data['frames'] = 0
     
     #colors for the color god
     green = Color(0x006600,1)
@@ -74,4 +80,4 @@ if __name__ == '__main__':
     App().listenKeyEvent('keydown','left arrow',moveLeft)
     App().listenKeyEvent('keydown','up arrow',moveUp)
     App().listenKeyEvent('keydown','down arrow',moveDown)
-    App().run()
+    App().run(step)
